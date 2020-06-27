@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+    <package name="package" namespace="/" extends="struts-default">
+        <action name="login" class="action.LoginAction">
+            <result name="admin">/admin_index.jsp</result>
+            <result name="user">/user_index.jsp</result>
+            <result name="error">/error.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="adminshow*" class="action.AdminAction{1}" method="show">
+            <result name="success">/admin_show{1}.jsp</result>
+        </action>
+        <action name="adminquery*" class="action.AdminAction{1}" method="query">
+            <result name="success" >/admin_show{1}.jsp</result>
+        </action>
+        <action name="adminupdate*" class="action.AdminAction{1}" method="update">
+            <result name="success" type="chain">adminshow{1}</result>
+        </action>
+        <action name="admindelete*" class="action.AdminAction{1}" method="delete">
+            <result name="success" type="chain">adminshow{1}</result>
+        </action>
+        <action name="adminadd*" class="action.AdminAction{1}" method="add">
+            <result name="success" type="chain">adminshow{1}</result>
+        </action>
+        <action name="upload*" class="action.AdminAction{1}" method="upload">
+            <result name="success" type="chain">adminshow{1}</result>
+        </action>
+        <action name="download*" class="action.AdminAction{1}" method="download">
+            <result name="success" type="stream">
+                <param name="inputName">input</param>
+                <param name="contentDisposition">attachment;filename=${filename}</param>
+            </result>
+        </action>
+        <action name="usershow*" class="action.UserAction{1}" method="show">
+            <result name="success">/user_show{1}.jsp</result>
+        </action>
+        <action name="userupdate*" class="action.UserAction" method="update">
+            <result name="success" type="chain">usershow{1}</result>
+        </action>
+        <action name="userquery*" class="action.UserAction{1}" method="query">
+            <result name="success" >/user_show{1}.jsp</result>
+        </action>
+
+    </package>
+</struts>
